@@ -1,0 +1,17 @@
+Prosjekt Parkering
+https://stud.iie.ntnu.no/~peroma/html5/prosjekt/
+
+Oppgaven er løst med HTML5, CSS3, Javascript og jQuery
+Bruker også noen ikoner (hentes fra Googles CDN)
+Løsningen er responsiv og skal fungere på mobil
+Koden er kommentert
+
+Følgende ressurser inngår:
+index.html
+parkering.css
+parkering.js
+ajax_loader.gif
+hent-status.php
+
+Per Olav Mariussen
+28.04.2017

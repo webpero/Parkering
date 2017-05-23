@@ -1,0 +1,116 @@
+﻿<html>
+<!--
+	(c) webpero 2017
+	Parkeringsapplikasjon
+	26.04.2017
+ -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Parkering</title>
+
+	<!-- Lokal CSS -->
+	<link rel="stylesheet"  href="parkering.css" />
+	<!-- Google ikoner -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+	
+	<div class="row">
+
+		<!-- Kolonne 1: Heading og kart -->
+		<div id="col1" >
+			<header class="box">
+				<h1>Parkering</h1>
+				<p><a href="https://stud.iie.ntnu.no/~peroma/">&copy; 2017 webpero</a></p>
+			</header>
+			<section id="mapContainer">
+				<img id="map" src=""/>
+				<canvas id="mapOverlay">
+				</canvas>
+			</section>
+		</div>
+		<!-- Slutt kolonne 1 -->
+		
+		<!-- Kolonne 2: Innstillinger og visning av data -->
+		<div id="col2" >
+		
+			<!-- Brukerinnstillinger -->
+			<section id="settings" class="box">
+				<h2>Innstillinger</h2>
+				<form>
+					<p>
+						<input id="uiSaveData" type="checkbox" /><label for="uiSaveData">Husk meg (lagrer alle innstillinger)</label><br/>
+						<input id="uiDetails" type="checkbox" /><label for="uiDetails">Vise detaljer på kartet</label><br/>
+						<input id="uiUserShow" type="checkbox" /><label for="uiUserShow">Vise din posisjon på kartet</label><span id="msg"></span>
+					</p>
+					<p>
+						<label for="uiNumP">Vis bare P med minst dette antallet ledige plasser:<span id="uiNumPVal" class="vis">0</span></label><br/>
+						<input id="uiNumP" type="range" min="0" max="200" step="5" value="0"/>
+					</p>
+					<p>
+						<select id="uiDataRefresh">
+							<option value="5">5 sekunder</option>
+							<option value="10" selected>10 sekunder</option>
+							<option value="20">20 sekunder</option>
+							<option value="30">30 sekunder</option>
+							<option value="60">1 minutt</option>
+							<option value="300">5 minutter</option>
+						</select>
+						<label for="uiDataRefresh">&nbsp;mellom oppdateringer av data</label>
+					</p>
+					<p><input id="uiBgColor" type="color" value="#ffffff"/><label for="uiBgColor">Valgt bakgrunnsfarge for siden</label></p>
+				</form>
+			</section>	
+			
+			<!-- Visning av statistikk (tabell og eventuelt grafisk) -->
+			<section id="statistics" class="box">
+				<h2>
+					Status<img id="waitIcon" src="ajax_loader.gif" />
+					<button id="uiPause"><i class="material-icons" id="pauseIcon">pause</i></button>
+				</h2>
+				<table>
+					<!-- Vise data om alle parkingshus -->
+					<tr><th id="timeStamp"></th><th>P1 (<span id="maxnumP1"></span>)</th><th>P2 (<span id="maxnumP2"></span>)</th><th>P3 (<span id="maxnumP3"></span>)</th><th>P4 (<span id="maxnumP4"></span>)</th></tr>
+					<tr class="table-line"><td colspan="5">Siste status</td></tr>
+					<tr><td>Belegg (%)</td><td class="P1" id="prcP1"></td><td class="P2" id="prcP2"></td><td class="P3" id="prcP3"></td><td class="P4" id="prcP4"></td></tr>
+					<tr><td>Plasser tatt</td><td class="P1" id="numP1"></td><td class="P2" id="numP2"></td><td class="P3" id="numP3"></td><td class="P4" id="numP4"></td></tr>
+					<tr><td>Plasser ledig</td><td class="P1" id="freeP1"></td><td class="P2" id="freeP2"></td><td class="P3" id="freeP3"></td><td class="P4" id="freeP4"></td></tr>
+					<tr class="table-line"><td colspan="5">Gjennomsnitt siden lasting av nettsiden</td></tr>
+					<tr><td>Belegg (%)</td><td class="P1" id="avgPrcP1"></td><td class="P2" id="avgPrcP2"></td><td class="P3" id="avgPrcP3"></td><td class="P4" id="avgPrcP4"></td></tr>
+					<tr><td>Plasser tatt</td><td class="P1" id="avgNumP1"></td><td class="P2" id="avgNumP2"></td><td class="P3" id="avgNumP3"></td><td class="P4" id="avgNumP4"></td></tr>
+					<tr><td>Plasser ledig</td><td class="P1" id="avgFreeP1"></td><td class="P2" id="avgFreeP2"></td><td class="P3" id="avgFreeP3"></td><td class="P4" id="avgFreeP4"></td></tr>
+				</table>
+
+				<form>
+					<!-- Brukerinput for styring av grafisk visning -->					
+					<p>
+						<input id="statGraph" type="checkbox" /><label for="statGraph">Vise grafisk</label>
+						<span class="nowrap"><input name="statP" id="statP1" type="radio" /><label for="statP1">P1</label><input id="statColorP1" type="color" value="#e09090" disabled /></span>
+						<span class="nowrap"><input name="statP" id="statP2" type="radio" /><label for="statP2">P2</label><input id="statColorP2" type="color" value="#90e0e0" disabled /></span>
+						<span class="nowrap"><input name="statP" id="statP3" type="radio" /><label for="statP3">P3</label><input id="statColorP3" type="color" value="#90e090" disabled /></span>
+						<span class="nowrap"><input name="statP" id="statP4" type="radio" /><label for="statP4">P4</label><input id="statColorP4" type="color" value="#e0e090" disabled /></span>
+					</p>
+				</form>
+				<div>
+					<!-- Ett canvas for bakgrunnslinker og ett for søylene -->
+					<canvas id="parkStatBg" width="486" height="160">
+					</canvas>
+					<canvas id="parkStat" width="486" height="160">
+					</canvas>
+				</div>
+			</section>	
+			
+		</div>
+		<!-- Slutt kolonne 2 -->
+	
+	</div>
+	
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Lokalt javascript, med init av siden -->
+	<script src="parkering.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+﻿/* (c) webpero 2017
+ * Parkeringsapplikasjon
+ * 28.04.2017
+ */
+ 
+/* Fonter og overskrifter */
+body, table {
+	font-family: "Open Sans", "Arial", "sans-serif";
+	font-size: 0.9em;
+}
+h2 {
+	margin-bottom: 0.5em;
+}
+header > p {
+	margin-bottom: 0px;
+}
+header a {
+	color: gray;
+	font-size: 80%;
+	text-decoration: none;
+}
+p {
+	margin-top: 0.5em;
+}
+p:last-child {
+	margin-bottom: 0;
+}
+.nowrap {
+		white-space: nowrap;
+}
+
+/* Bokser */
+.box {
+	padding: 10px;
+	border: 1px solid #999;
+	border-radius: 3px;
+	box-shadow: 3px 3px 5px #ddd;
+	margin-bottom: 10px;
+	background: white;
+}
+.box h1, .box h2 {
+	margin-top: 0px;
+}
+
+/* Kolonner (responsiv) */
+#col1 {
+	position: relative;
+	width: 100%;
+}
+#col2 {
+	position: relative;
+}
+@media screen and (min-width: 650px) {
+	#col1 {
+		width: 640px;
+		float: left;
+		margin-right: 10px;	
+	}
+	#col2 {
+		float: left;
+	}
+}
+
+/* KART: Håndtering av kart (responsiv) */
+#map {
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+	padding: 0px 10px 10px 0px;
+}
+@media screen and (min-width: 650px) {
+	#map {
+		width: 640px;
+		height: 640px;
+		padding-right: 0px;
+	}
+}
+#mapOverlay {
+	position: absolute;
+	z-index: 10;
+}
+
+/* STATUS: Overskrift for status med knapper m.m. */
+#pauseMsg {
+	display: none;
+}
+#waitIcon {
+	margin-left: 10px;
+	height: 20px;
+	display: none;
+}
+#uiPause {
+	margin-left: 15px;
+}
+#pauseIcon {
+	font-size: 20px;
+}
+
+/* STATUS: Input av data */
+#settings form {
+	margin-bottom: 0;
+}
+#statistics label {
+	margin-right: 5px;
+}
+input[type="color"] {
+	margin-right: 10px;
+}
+
+/* STATUS: Visning av data */
+#statistics table {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 1.5em;
+}
+#statistics tr {
+	line-height: 1.5em;
+}
+#statistics .table-line {	
+	font-weight: bold;
+	background: #eee;
+}
+#statistics .table-line td {	
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+#statistics td {	
+	padding: 0 5px;
+}
+#timeStamp {
+	text-align: left;
+	font-weight: normal;
+	padding-left: 5px;
+}
+#parkStat {
+	padding: 0 5px;
+	z-index: 10;
+}
+#parkStatBg {
+	position: absolute;
+	left: 11px;
+	padding: 0 5px;
+	z-index: 0;
+}
+.P1, .P2, .P3, .P4 {
+	min-width: 50px;
+	text-align: right;
+	border-right: 1px solid #ddd;
+}
