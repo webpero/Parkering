@@ -396,7 +396,7 @@ function showMap(width,height)
 {
 	$("#map").attr("src", 
 		"https://maps.googleapis.com/maps/api/staticmap?center=" + mapCenter.lat + "," + mapCenter.lng +
-		"&zoom=14&key=AIzaSyCUb7lLbMRJkweAbcXiS3ejObHqnlDkKOQ" +
+		"&zoom=14&key=AIzaSyAL58Of35Vjc2CeUAbSPXc1zd1ugUmYL4Q" +
 		"&size=" + width + "x" + height +
 		( userShow ? "&markers=color:blue%7C" + userPos.lat + "," + userPos.lng : "" )
 	);
