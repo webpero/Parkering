@@ -318,7 +318,7 @@ function initData()
 	
 	//Opprett ny datastrøm
 	pauseES = false;
-	parkES = new EventSource('hent-status.php?t='+userDataRefresh);
+	parkES = new EventSource('http://stud.iie.ntnu.no/~peroma/html5/prosjekt/hent-status.php?t='+userDataRefresh);
 	parkES.onmessage = function(e) {
 		let tmpData = e.data.split(';');							//Dataene fra source, splitt opp i ett sett for hver parkering
 		let graphId = $("input[name='statP']:checked").attr("id");  //Eventuell parkering valgt av bruker for grafisk visning ("P1"/"P2"/"P3"/"P4")
