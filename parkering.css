@@ -146,3 +146,6 @@ input[type="color"] {
 	text-align: right;
 	border-right: 1px solid #ddd;
 }
+#grafisk-visning {
+	margin-top: 10px;
+}
