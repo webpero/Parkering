@@ -92,6 +92,7 @@ $(function()
 		$("#uiSaveData").prop( "checked", userSaveData );
 		$("#uiDetails").prop( "checked", userDetails );
 		$("#uiUserShow").prop( "checked", userShow );
+		$("#uiNumPVal").val( userMinFree );
 		$("#uiNumP").val( userMinFree );
 		$("#uiBgColor").val( userBgColor );
 		$("#uiDataRefresh").val( userDataRefresh );
